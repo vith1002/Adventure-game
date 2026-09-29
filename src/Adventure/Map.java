@@ -1,20 +1,51 @@
 package Adventure;
 
+import java.util.ArrayList;
+
 public class Map {
 
     private Room startRoom;
 
     public Map() {
 
-        Room room1 = new Room("Room 1", "Et gammelt bibliotek.");
-        Room room2 = new Room("Room 2", "En smal korridor.");
-        Room room3 = new Room("Room 3", "Et støvet soveværelse.");
-        Room room4 = new Room("Room 4", "En mørk gang.");
-        Room room5 = new Room("Room 5", "Den centrale hall.");
-        Room room6 = new Room("Room 6", "Et køkken.");
-        Room room7 = new Room("Room 7", "En kælder.");
-        Room room8 = new Room("Room 8", "Et lager.");
-        Room room9 = new Room("Room 9", "Skatkammeret.");
+        Item lampe = new Item(" Stor mægtig lampe", "lampe", 20);
+
+
+        Item bog1 = new Item("Book of Askaban","Askaban Book", 2);
+        Item bog2 = new Item("Book of water","Water Book", 2);
+        Item bog3 = new Item("Book of fire","Fire Book", 2);
+        Item rusticSword = new Item("A Rustic Sword","Rustic Sword", 2);
+        //Sword
+        Item shield = new Item("A Shield From The Viking Times","Shield", 2);
+        //Shield
+        Item Rum = new Item("A Very Old Bottle Of Rum","Bottle Of Rum", 2);
+        //End up in a random room
+        Item painting = new Item("","", 2);
+        //May be needed for a secret door
+        Item key = new Item("Old Rustic Key With A Skull","Rustic Key", 2);
+        //Used to open a locked door
+
+
+        ArrayList<Item> ItemsRoom1 = new ArrayList<>();
+        ItemsRoom1.add(bog1);
+        ItemsRoom1.add(bog2);
+        ItemsRoom1.add(bog3);
+
+        ArrayList<Item> ItemsRoom2 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom3 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom4 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom5 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom6 = new ArrayList<>();
+
+        Room room1 = new Room("Room 1", "Et gammelt bibliotek.", ItemsRoom1);
+        Room room2 = new Room("Room 2", "En smal korridor.", ItemsRoom1);
+        Room room3 = new Room("Room 3", "Et støvet soveværelse.", ItemsRoom1);
+        Room room4 = new Room("Room 4", "En mørk gang.", ItemsRoom1);
+        Room room5 = new Room("Room 5", "Den centrale hall.", ItemsRoom1);
+        Room room6 = new Room("Room 6", "Et køkken.", ItemsRoom1);
+        Room room7 = new Room("Room 7", "En kælder.", ItemsRoom1);
+        Room room8 = new Room("Room 8", "Et lager.", ItemsRoom1);
+        Room room9 = new Room("Room 9", "Skatkammeret.", ItemsRoom1);
 
         // Nord/Syd forbindelser
         room1.setSouth(room4);

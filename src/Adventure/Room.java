@@ -1,17 +1,30 @@
 package Adventure;
 
+import java.util.ArrayList;
+
 public class Room {
     private String name;
     private String description;
+    private ArrayList<Item> items;
 
     private Room north;
     private Room east;
     private Room south;
     private Room west;
 
-    public Room(String name, String description){
+    public Room(String name, String description, ArrayList<Item> items){
         this.name = name;
         this.description = description;
+        this.items = items;
+    }
+
+    public Item findItem(String shortName){
+        for (Item item : items){
+            if(shortName.equalsIgnoreCase(item.getShortName())){
+                return item;
+            }
+        }
+        return null;
     }
 
     public String getName(){
@@ -20,6 +33,10 @@ public class Room {
 
     public String getDescription() {
         return description;
+    }
+
+    public ArrayList<Item> getItems(){
+        return items;
     }
 
     public void setNorth(Room north){
@@ -51,5 +68,7 @@ public class Room {
     public Room getWest() {
         return west;
     }
+
+
 }
 
