@@ -6,10 +6,12 @@ public class Player {
 
     private Room currentRoom;
     private ArrayList<Item> inventory;
+    private int maxWeight = 20;
 
     public Player(Room currentRoom) {
         this.currentRoom = currentRoom;
         this.inventory = new ArrayList<>();
+        this.maxWeight = maxWeight;
     }
 
     public Room getCurrentRoom() {
@@ -20,9 +22,23 @@ public class Player {
         currentRoom.getItems().remove(item);
     }
 
+    public int inventoryWeight(){
+        int invWeight = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            int itemWeight = inventory.get(i).getWeight();
+            invWeight += itemWeight;
+        }
+
+        return invWeight;
+    }
+
+    public int getMaxWeight(){
+        return maxWeight;
+    }
+
     public Item takeItem(String shortName){
         Item itemFound = getCurrentRoom().findItem(shortName);
-        if(itemFound != null){
+        if(itemFound != null && inventoryWeight() + itemFound.getWeight() < maxWeight){
             removeItemFromRoom(itemFound);
             inventory.add(itemFound);
            return itemFound;
@@ -45,6 +61,18 @@ public class Player {
         return null;
     }
 
+    public boolean takeItemFromInventory(String shortName){
+        String itemHave = shortName;
+
+        for (int i = 0; i < inventory.size(); i++) {
+            if(itemHave.equalsIgnoreCase(inventory.get(i).getShortName())){
+                inventory.remove(itemHave);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void printInventory(){
         if(inventory.size() > 0){
             for (Item item : inventory){
@@ -54,8 +82,12 @@ public class Player {
     }
 
     public boolean move(String direction) {
-
+        boolean isRoomLocked = false;
         Room nextRoom = null;
+        if(currentRoom.isLocked() == true){
+            isRoomLocked = true;
+            return isRoomLocked;
+        }
 
         switch (direction.toLowerCase()) {
 

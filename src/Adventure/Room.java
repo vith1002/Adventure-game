@@ -6,16 +6,18 @@ public class Room {
     private String name;
     private String description;
     private ArrayList<Item> items;
+    private boolean locked;
 
     private Room north;
     private Room east;
     private Room south;
     private Room west;
 
-    public Room(String name, String description, ArrayList<Item> items){
+    public Room(String name, String description, ArrayList<Item> items, Boolean locked){
         this.name = name;
         this.description = description;
         this.items = items;
+        this.locked = locked;
     }
 
     public Item findItem(String shortName){
@@ -25,6 +27,14 @@ public class Room {
             }
         }
         return null;
+    }
+
+    public boolean isLocked(){
+        return locked;
+    }
+
+    public void setLocked(boolean locked){
+        this.locked = locked;
     }
 
     public String getName(){

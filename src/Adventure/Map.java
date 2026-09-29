@@ -8,9 +8,6 @@ public class Map {
 
     public Map() {
 
-        Item lampe = new Item(" Stor mægtig lampe", "lampe", 20);
-
-
         Item bog1 = new Item("Book of Askaban","Askaban Book", 2);
         Item bog2 = new Item("Book of water","Water Book", 2);
         Item bog3 = new Item("Book of fire","Fire Book", 2);
@@ -22,68 +19,132 @@ public class Map {
         //End up in a random room
         Item painting = new Item("","", 2);
         //May be needed for a secret door
-        Item key = new Item("Old Rustic Key With A Skull","Rustic Key", 2);
-        //Used to open a locked door
+
+
+        Item rusticKey = new Item("Old Rustic Key Seems Important","Rustic Key", 1);
+        //Used to open the Basement
+        Item silverKey = new Item("Silver Key Seems Important", "Silver Key", 1);
+        //Used to open the Study
+        Item goldenKey = new Item("Shiny Golden Key Seems Important", "Golden Key", 1);
+        //Used to open the Secret Attic
+        Item cryptoKey = new Item("Dark Auro Embessels The Objekt Looking Like A Key", "Crypto Key", 1);
+        //Used to open End Area
+        Item theHauntedIdol = new Item("Mystrious Force That Feels Overwhelming", "Haunted Idol", 20);
+        //Win Condition
+        Item flashLight = new Item("Flashligt It Seems Like It Needs Batteries", "Flash Light", 1);
+        //Used to see more items
+        Item batteries = new Item("Old Batteries Seems To Have Some Power Left", "Batteries", 1);
+        //Used to power the flashlight
+        Item backPack = new Item("Old BackPack Might Be Of Use", "BackPack", -20);
+        //Lets The User Have More Inventory Space
+        Item map = new Item("Old Map Seems To Be Of The House", "Map", 1);
+        //Lets The Player See Every Room
+        Item oldDiary = new Item("Old Diary Belongs To Edward Thomsen", "Diary", 1);
+        //Gives Information From A Person Who Got Lost In The House
 
 
         ArrayList<Item> ItemsRoom1 = new ArrayList<>();
-        ItemsRoom1.add(bog1);
-        ItemsRoom1.add(bog2);
-        ItemsRoom1.add(bog3);
+        ItemsRoom1.add(shield);
+        ItemsRoom1.add(rusticKey);
+        ItemsRoom1.add(rusticSword);
 
         ArrayList<Item> ItemsRoom2 = new ArrayList<>();
+        ItemsRoom2.add(bog1);
+        ItemsRoom2.add(bog2);
+        ItemsRoom2.add(Rum);
+
         ArrayList<Item> ItemsRoom3 = new ArrayList<>();
         ArrayList<Item> ItemsRoom4 = new ArrayList<>();
         ArrayList<Item> ItemsRoom5 = new ArrayList<>();
+        ItemsRoom5.add(shield);
+        ItemsRoom5.add(rusticSword);
+        ItemsRoom5.add(rusticKey);
         ArrayList<Item> ItemsRoom6 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom7 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom8 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom9 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom10 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom11 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom12 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom13 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom14 = new ArrayList<>();
+        ArrayList<Item> ItemsRoom15 = new ArrayList<>();
 
-        Room room1 = new Room("Room 1", "Et gammelt bibliotek.", ItemsRoom1);
-        Room room2 = new Room("Room 2", "En smal korridor.", ItemsRoom1);
-        Room room3 = new Room("Room 3", "Et støvet soveværelse.", ItemsRoom1);
-        Room room4 = new Room("Room 4", "En mørk gang.", ItemsRoom1);
-        Room room5 = new Room("Room 5", "Den centrale hall.", ItemsRoom1);
-        Room room6 = new Room("Room 6", "Et køkken.", ItemsRoom1);
-        Room room7 = new Room("Room 7", "En kælder.", ItemsRoom1);
-        Room room8 = new Room("Room 8", "Et lager.", ItemsRoom1);
-        Room room9 = new Room("Room 9", "Skatkammeret.", ItemsRoom1);
+        Room room1 = new Room("Gate", "Den rustne port til godset.", ItemsRoom1, false);
+        Room room2 = new Room("Porch", "En gammel træveranda.", ItemsRoom2, false);
+        Room room3 = new Room("Entrance", "Indgangen til det hjemsøgte hus.", ItemsRoom3, false);
+        Room room4 = new Room("Main Hall", "Den store centrale hal.", ItemsRoom4, false);
+        Room room5 = new Room("Library", "Et støvet bibliotek.", ItemsRoom5, false);
+        Room room6 = new Room("Study", "Et gammelt arbejdsværelse.", ItemsRoom6, false);
+        Room room7 = new Room("Bedroom", "Et forladt soveværelse.", ItemsRoom7, false);
+        Room room8 = new Room("Ballroom", "En mørk balsal.", ItemsRoom8, false);
+        Room room9 = new Room("Dining Room", "En stor spisestue.", ItemsRoom9, false);
+        Room room10 = new Room("Kitchen", "Et gammelt køkken.", ItemsRoom10, false);
+        Room room11 = new Room("Basement", "En fugtig kælder.", ItemsRoom11, false);
+        Room room12 = new Room("Boiler Room", "Kedlerne brummer svagt.", ItemsRoom12, false);
+        Room room13 = new Room("Attic", "Et mørkt loft.", ItemsRoom13, false);
+        Room room14 = new Room("Storage Loft", "Fyldt med gamle kasser.", ItemsRoom14, false);
+        Room room15 = new Room("Secret Attic", "Et skjult loftsrum.", ItemsRoom15, false);
 
-        // Nord/Syd forbindelser
-        room1.setSouth(room4);
-        room4.setNorth(room1);
 
-        room2.setSouth(room5);
-        room5.setNorth(room2);
+        //Every way you can walk in the haunted House Game
 
-        room3.setSouth(room6);
-        room6.setNorth(room3);
+        //Gate <-> Porch <-> Entrance
+        room1.setNorth(room2);
+        room2.setSouth(room1);
 
-        room4.setSouth(room7);
-        room7.setNorth(room4);
+        room2.setNorth(room3);
+        room3.setSouth(room2);
 
-        room5.setSouth(room8);
-        room8.setNorth(room5);
+        //Entrance <-> Main Hall
+        room3.setNorth(room4);
+        room4.setSouth(room3);
 
-        room6.setSouth(room9);
-        room9.setNorth(room6);
+        //Main Hall <-> Dining
+        room4.setWest(room9);
+        room9.setEast(room4);
 
-        // Øst/Vest forbindelser
-        room1.setEast(room2);
-        room2.setWest(room1);
+        //Dining <-> Kitchen
+        room9.setWest(room10);
+        room10.setEast(room9);
 
-        room2.setEast(room3);
-        room3.setWest(room2);
+        //Kitchen <-> Study
+        room10.setNorth(room6);
+        room6.setSouth(room10);
 
-        room4.setEast(room5);
-        room5.setWest(room4);
+        //Study <-> Library
+        room6.setEast(room5);
+        room5.setWest(room6);
 
-        room5.setEast(room6);
-        room6.setWest(room5);
+        //Library <-> Bedroom
+        room5.setEast(room7);
+        room7.setWest(room5);
 
-        room7.setEast(room8);
-        room8.setWest(room7);
+        //Bedroom <-> Ballroom
+        room7.setSouth(room8);
+        room8.setNorth(room7);
 
-        room8.setEast(room9);
-        room9.setWest(room8);
+        //Ballroom <-> Main Hall
+        room8.setWest(room4);
+        room4.setEast(room8);
+
+        //Loft <-> veje
+        room5.setNorth(room13);
+        room13.setSouth(room5);
+
+        room13.setNorth(room14);
+        room14.setSouth(room13);
+
+        room14.setNorth(room15);
+        room15.setSouth(room14);
+
+        //Basement <-> veje
+        room10.setSouth(room11);
+        room11.setNorth(room10);
+
+        room11.setSouth(room12);
+        room12.setNorth(room11);
+
 
         startRoom = room5;
     }
