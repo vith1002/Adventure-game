@@ -8,40 +8,39 @@ public class Map {
 
     public Map() {
 
-        Item bog1 = new Item("Book of Askaban","Askaban Book", 2);
-        Item bog2 = new Item("Book of water","Water Book", 2);
-        Item bog3 = new Item("Book of fire","Fire Book", 2);
-        Item rusticSword = new Item("A Rustic Sword","Rustic Sword", 2);
+        Item bog1 = new Item("Book of Askaban","Askaban Book", 2, false);
+        Item bog2 = new Item("Book of water","Water Book", 2, false);
+        Item bog3 = new Item("Book of fire","Fire Book", 2, false);
+        Item rusticSword = new Item("A Rustic Sword","Rustic Sword", 2, false);
         //Sword
-        Item shield = new Item("A Shield From The Viking Times","Shield", 2);
+        Item shield = new Item("A Shield From The Viking Times","Shield", 2, false);
         //Shield
-        Item Rum = new Item("A Very Old Bottle Of Rum","Bottle Of Rum", 2);
-        //End up in a random room
-        Item painting = new Item("","", 2);
+        Item painting = new Item("","", 2, false);
         //May be needed for a secret door
 
 
-        Item rusticKey = new Item("Old Rustic Key Seems Important","Rustic Key", 1);
+        Item rusticKey = new Item("Old Rustic Key Seems Important","Rustic Key", 1, false);
         //Used to open the Basement
-        Item silverKey = new Item("Silver Key Seems Important", "Silver Key", 1);
+        Item silverKey = new Item("Silver Key Seems Important", "Silver Key", 1, false);
         //Used to open the Study
-        Item goldenKey = new Item("Shiny Golden Key Seems Important", "Golden Key", 1);
+        Item goldenKey = new Item("Shiny Golden Key Seems Important", "Golden Key", 1, false);
         //Used to open the Secret Attic
-        Item cryptoKey = new Item("Dark Auro Embessels The Objekt Looking Like A Key", "Crypto Key", 1);
+        Item cryptoKey = new Item("Dark Auro Embessels The Objekt Looking Like A Key", "Crypto Key", 1, false);
         //Used to open End Area
-        Item theHauntedIdol = new Item("Mystrious Force That Feels Overwhelming", "Haunted Idol", 20);
+        Item theHauntedIdol = new Item("Mystrious Force That Feels Overwhelming", "Haunted Idol", 20, false);
         //Win Condition
-        Item flashLight = new Item("Flashligt It Seems Like It Needs Batteries", "Flash Light", 1);
+        Item flashLight = new Item("Flashligt It Seems Like It Needs Batteries", "Flash Light", 1, false);
         //Used to see more items
-        Item batteries = new Item("Old Batteries Seems To Have Some Power Left", "Batteries", 1);
+        Item batteries = new Item("Old Batteries Seems To Have Some Power Left", "Batteries", 1, false);
         //Used to power the flashlight
-        Item backPack = new Item("Old BackPack Might Be Of Use", "BackPack", -20);
+        Item backPack = new Item("Old BackPack Might Be Of Use", "BackPack", -20, false);
         //Lets The User Have More Inventory Space
-        Item map = new Item("Old Map Seems To Be Of The House", "Map", 1);
+        Item map = new Item("Old Map Seems To Be Of The House", "Map", 1, false);
         //Lets The Player See Every Room
-        Item oldDiary = new Item("Old Diary Belongs To Edward Thomsen", "Diary", 1);
+        Item oldDiary = new Item("Old Diary Belongs To Edward Thomsen", "Diary", 1, false);
         //Gives Information From A Person Who Got Lost In The House
 
+        Item something = new Food("An Old Loaf Of Half Eaten Bread", "Bread", 1, 10, false);
 
         ArrayList<Item> ItemsRoom1 = new ArrayList<>();
         ItemsRoom1.add(shield);
@@ -51,14 +50,13 @@ public class Map {
         ArrayList<Item> ItemsRoom2 = new ArrayList<>();
         ItemsRoom2.add(bog1);
         ItemsRoom2.add(bog2);
-        ItemsRoom2.add(Rum);
 
         ArrayList<Item> ItemsRoom3 = new ArrayList<>();
         ArrayList<Item> ItemsRoom4 = new ArrayList<>();
         ArrayList<Item> ItemsRoom5 = new ArrayList<>();
         ItemsRoom5.add(shield);
         ItemsRoom5.add(rusticSword);
-        ItemsRoom5.add(rusticKey);
+        ItemsRoom5.add(map);
         ArrayList<Item> ItemsRoom6 = new ArrayList<>();
         ArrayList<Item> ItemsRoom7 = new ArrayList<>();
         ArrayList<Item> ItemsRoom8 = new ArrayList<>();
@@ -79,8 +77,9 @@ public class Map {
         Room room7 = new Room("Bedroom", "Et forladt soveværelse.", ItemsRoom7, false);
         Room room8 = new Room("Ballroom", "En mørk balsal.", ItemsRoom8, false);
         Room room9 = new Room("Dining Room", "En stor spisestue.", ItemsRoom9, false);
+
         Room room10 = new Room("Kitchen", "Et gammelt køkken.", ItemsRoom10, false);
-        Room room11 = new Room("Basement", "En fugtig kælder.", ItemsRoom11, false);
+        Room room11 = new Room("Basement", "En fugtig kælder.", ItemsRoom11, true);
         Room room12 = new Room("Boiler Room", "Kedlerne brummer svagt.", ItemsRoom12, false);
         Room room13 = new Room("Attic", "Et mørkt loft.", ItemsRoom13, false);
         Room room14 = new Room("Storage Loft", "Fyldt med gamle kasser.", ItemsRoom14, false);
@@ -88,7 +87,6 @@ public class Map {
 
 
         //Every way you can walk in the haunted House Game
-
         //Gate <-> Porch <-> Entrance
         room1.setNorth(room2);
         room2.setSouth(room1);

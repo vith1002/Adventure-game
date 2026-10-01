@@ -4,11 +4,21 @@ public class Item {
     private String longName;
     private String shortName;
     private int weight;
+    private boolean requiresLight;
 
-    public Item(String longName, String shortName,  int weight){
+    public Item(String longName, String shortName,  int weight, boolean requiresLight){
         this.longName = longName;
         this.shortName = shortName;
         this.weight = weight;
+        this.requiresLight = requiresLight;
+    }
+
+    public boolean isRequiresLight(){
+        return requiresLight;
+    }
+
+    public void setRequiresLight(boolean requiresLight){
+        this.requiresLight = requiresLight;
     }
 
     public int getWeight(){
@@ -35,4 +45,7 @@ public class Item {
         this.shortName = shortName;
     }
 
+    public int getChangeHealth(){
+        return 0;
+    }
 }
