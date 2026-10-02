@@ -73,19 +73,11 @@ public class Player {
         }
 
         if(item == null){
-            return new EatOutcome(
-                    EatResult.NOT_FOUND,
-                    null,
-                    0
-            );
+            return new EatOutcome(EatResult.NOT_FOUND,null,0);
         }
 
         if(!(item instanceof Food)){
-            return new EatOutcome(
-                    EatResult.NOT_FOOD,
-                    item.getLongName(),
-                    0
-            );
+            return new EatOutcome(EatResult.NOT_FOOD,item.getLongName(),0);
         }
 
         Food food = (Food) item;
@@ -98,11 +90,7 @@ public class Player {
             removeItemFromRoom(item);
         }
 
-        return new EatOutcome(
-                EatResult.EATEN,
-                food.getLongName(),
-                food.getChangeHealth()
-        );
+        return new EatOutcome(EatResult.EATEN, food.getLongName(), food.getChangeHealth());
     }
 
     public void setMaxWeight(int maxWeight){
@@ -184,35 +172,28 @@ public class Player {
     //Prints the rooms around the player
 
     public void canMove(){
-        if(currentRoom.getNorth() != null){
-            if(currentRoom.getNorth().isLocked() == false){
-                System.out.println("You Can Go North");
-            }else if(currentRoom.getNorth().isLocked()){
-                System.out.println("The Door To The North Is Locked");
-            }else{
-                System.out.println("You Cant Walk That Way");
-            }
+
+        System.out.println();
+
+        if(currentRoom.getNorth() != null && !currentRoom.getNorth().isLocked()){
+            System.out.println("North -> " + currentRoom.getNorth().getName());
+        } else if (currentRoom.getNorth() != null && currentRoom.getNorth().isLocked()) {
+            System.out.println("North -> " + currentRoom.getNorth().getName() + " is locked!");
         }
-        if(currentRoom.getEast() != null){
-            if(currentRoom.getEast().isLocked() == false){
-                System.out.println("You Can Go East");
-            }else{
-                System.out.println("The Door To The East Is Locked");
-            }
+        if(currentRoom.getWest() != null && !currentRoom.getWest().isLocked()){
+            System.out.println("West -> " + currentRoom.getWest().getName());
+        } else if (currentRoom.getWest() != null && currentRoom.getWest().isLocked()) {
+            System.out.println("West -> " + currentRoom.getWest().getName() + " is locked!");
         }
-        if(currentRoom.getSouth() != null){
-            if(currentRoom.getSouth().isLocked() == false){
-                System.out.println("You Can Go South");
-            }else{
-                System.out.println("The Door To The South Is Locked");
-            }
+        if(currentRoom.getSouth() != null && !currentRoom.getSouth().isLocked()){
+            System.out.println("South -> " + currentRoom.getSouth().getName());
+        } else if (currentRoom.getSouth() != null && currentRoom.getSouth().isLocked()) {
+            System.out.println("South -> " + currentRoom.getSouth().getName() + " is locked!");
         }
-        if(currentRoom.getWest() != null){
-            if(currentRoom.getWest().isLocked() == false){
-                System.out.println("You Can Go West");
-            }else{
-                System.out.println("The Door To The West Is Locked");
-            }
+        if(currentRoom.getEast() != null && !currentRoom.getEast().isLocked()){
+            System.out.println("East -> " + currentRoom.getEast().getName());
+        } else if (currentRoom.getEast() != null && currentRoom.getEast().isLocked()) {
+            System.out.println("East -> " + currentRoom.getEast().getName() + " is locked!");
         }
     }
 

@@ -17,14 +17,45 @@ public class AdventureGameInterface {
         System.out.println("'quit' to exit the game!\n");
 
         while (true) {
+            if(player.getCurrentRoom().getName().equals("Exit")
+                    && player.searchItemFromInventory("Haunted Idol") != null){
+
+                System.out.println("You escaped with the Haunted Idol!");
+                System.out.println("You Win!");
+
+                break;
+            }
+
             if(player.searchItemFromInventory("Map") != null){
                 mapAquired = true;
             }
+            if(player.searchItemFromInventory("flash light") != null
+                    && player.searchItemFromInventory("batteries") != null){
 
+                flashLightOn = true;
+
+                System.out.println();
+                System.out.println("You put the batteries in the FlashLight");
+                System.out.println("Everything in front of you brightens up a little bit");
+                System.out.println("You Might be able to see more items with the flashlight");
+                System.out.println();
+
+                player.takeItemFromInventory("Batteries");
+            }
+
+
+            System.out.print("=============================================");
             System.out.println("\nYou Are In: " + player.getCurrentRoom().getName());
             System.out.println(player.getCurrentRoom().getDescription());
 
-            System.out.println("n/s/e/w or other options: ");
+            player.canMove();
+
+            System.out.println();
+
+            System.out.println("n/s/e/w or menu");
+            System.out.println("=============================================");
+            System.out.print("> ");
+
 
             String command = scanner.nextLine().toLowerCase();
 
@@ -33,7 +64,7 @@ public class AdventureGameInterface {
                 break;
             }
 
-            if (!player.move(command) && !command.equalsIgnoreCase("other options")) {
+            if (!player.move(command) && !command.equalsIgnoreCase("menu")) {
                 if(player.getCurrentRoom().isLocked()){
                     System.out.println("The Door Is Locked!");
                     System.out.println("Do You Have The Key?");
@@ -51,7 +82,7 @@ public class AdventureGameInterface {
                                     System.out.println("You Need The Rustic Key To Enter The Basement!");
                                     break;
                                 }
-                            case "study":
+                            case "storage loft":
                                 if(player.searchItemFromInventory("silver key") != null){
                                     player.takeItemFromInventory("Silver Key");
                                     player.getCurrentRoom().setLocked(false);
@@ -60,7 +91,7 @@ public class AdventureGameInterface {
                                     System.out.println("You Need The Silver Key!");
                                     break;
                                 }
-                            case "secret attic":
+                            case "porch":
                                 if(player.searchItemFromInventory("golden key") != null) {
                                     player.takeItemFromInventory("Golden Key");
                                     player.getCurrentRoom().setLocked(false);
@@ -69,13 +100,13 @@ public class AdventureGameInterface {
                                     System.out.println("You Need The Golden Key To Enter The Secret Attic");
                                     break;
                                 }
-                            case "slutområde":
-                                if(player.searchItemFromInventory("crypto key") != null) {
-                                    player.takeItemFromInventory("Crypto Key");
+                            case "secret attic":
+                                if(player.searchItemFromInventory("gate key") != null) {
+                                    player.takeItemFromInventory("gate Key");
                                     player.getCurrentRoom().setLocked(false);
                                     break;
                                 }else{
-                                    System.out.println("You Need A Crypto Key For This Area!");
+                                    System.out.println("You Need A Gate Key To Exit!");
                                     break;
                                 }
                         }
@@ -87,34 +118,41 @@ public class AdventureGameInterface {
 
 
 
-            if(command.equalsIgnoreCase("other options")){
-                System.out.println("Other commands:");
-                System.out.println("View Inventory");
+            if(command.equalsIgnoreCase("menu")){
+                System.out.println();
+                System.out.println("menu");
+                System.out.println("=============================================");
                 System.out.println("Look For Items");
+                System.out.println();
+                System.out.println("View Inventory");
                 System.out.println("Drop Item");
+                System.out.println();
                 System.out.println("Use Map");
-                System.out.print("Type your action");
+                System.out.println("=============================================");
+                System.out.print("> ");
+
                 command = scanner.nextLine().toLowerCase();
 
                 switch (command){
-                    case "look for items":
-                        System.out.println("\nItems in current room:");
+                    case "look", "look for items":
+                        System.out.println("\nItems in " + player.getCurrentRoom().getName() + " :\n");
                         int count = 0;
                         for(Item item : player.getCurrentRoom().getItems()) {
                             if(item.isRequiresLight() && !flashLightOn){
                                 if(count == 0){
-                                    System.out.println("Its Too Dark In Here");
+                                    System.out.println("Its Too Dark In Here To See Every Item");
                                 }
                                 count++;
                             }else{
                                 System.out.println(item.getShortName());
+                                System.out.println();
                             }
                         }
-                        System.out.println("Take an item or leave them");
+                        System.out.println("Take item or leave");
 
                         command = scanner.nextLine().toLowerCase();
 
-                        if (command.equalsIgnoreCase("take an item")){
+                        if (command.equalsIgnoreCase("take item") || command.equalsIgnoreCase("take")){
                             System.out.println("What item do you wish to take?");
 
                             command = scanner.nextLine().toLowerCase();
@@ -131,10 +169,11 @@ public class AdventureGameInterface {
                             }
                         }
                         break;
-                    case "view inventory":
+
+                    case "view inventory", "view":
                         player.printInventory();
                         break;
-                    case "drop item":
+                    case "drop item", "drop":
                         Item checkItem;
                         System.out.println("Which item would you like to drop");
                         player.printInventory();
@@ -147,6 +186,7 @@ public class AdventureGameInterface {
                             System.out.println("No Such Item Is In Your Inventory!");
                         }
                         break;
+
                     case "eat item":
                         System.out.println("What Item Would You Like to Eat?\n:");
                         command = scanner.nextLine().toLowerCase();
@@ -166,36 +206,35 @@ public class AdventureGameInterface {
                                 break;
                         }
                         break;
+
                     case "use map":
                         if (mapAquired){
-                            System.out.println("                   Secret Attic\n" +
-                                    "                        |\n" +
-                                    "                   Storage Loft\n" +
-                                    "                        |\n" +
-                                    "                      Attic\n" +
-                                    "                        |\n" +
-                                    "                     Library\n" +
-                                    "                    /       \\\n" +
-                                    "               Study       Bedroom\n" +
-                                    "                 |            |\n" +
-                                    "              Kitchen     Ballroom\n" +
-                                    "                 |            |\n" +
-                                    "             Dining Room  Main Hall\n" +
-                                    "                  \\        /\n" +
-                                    "                   \\      /\n" +
-                                    "                  Entrance\n" +
-                                    "                      |\n" +
-                                    "                    Porch\n" +
-                                    "                      |\n" +
-                                    "                     Gate\n" +
-                                    "\n" +
-                                    "                 Basement\n" +
-                                    "                      |\n" +
-                                    "                 Boiler Room");
+                            System.out.println(
+                                    "                   Secret Attic\n" +
+                                            "                        |\n" +
+                                            "                   Storage Loft\n" +
+                                            "                        |\n" +
+                                            "                      Attic\n" +
+                                            "                        |\n" +
+                                            "                     Library\n" +
+                                            "                    /       \\\n" +
+                                            "               Study       Bedroom\n" +
+                                            "                 |            |\n" +
+                                            " Basement  --  Kitchen     Ballroom\n" +
+                                            "      |          |            |\n" +
+                                            " Boiler Room  Dining Room -- Main Hall\n" +
+                                            "                               |\n" +
+                                            "                           Entrance\n" +
+                                            "                               |\n" +
+                                            "                             Porch\n" +
+                                            "                               |\n" +
+                                            "                              Gate"
+                            );
                         }else{
                             System.out.println("You Dont Have A Map!");
                         }
                         break;
+
                     default:
                         System.out.println("No Such Action Exist!");
                         break;
@@ -203,17 +242,7 @@ public class AdventureGameInterface {
             }
         }
 
-        if(player.searchItemFromInventory("flashlight") != null
-                && player.searchItemFromInventory("batteries") != null){
 
-            flashLightOn = true;
-
-            System.out.println("You put the batteries in the FlashLight");
-            System.out.println("Everything in front of you brightens up a little bit");
-            System.out.println("You Might be able to see more items with the flashlight");
-
-            player.takeItemFromInventory("Batteries");
-        }
 
 
 
