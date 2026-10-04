@@ -19,7 +19,7 @@ public class Map {
         //Used to open End Area
         Item theHauntedIdol = new Item("Mystrious Force That Feels Overwhelming", "Haunted Idol", 20, false);
         //Win Condition
-        Item flashLight = new Item("Flashligt It Seems Like It Needs Batteries", "Flash Light", 1, false);
+        Item flashLight = new Item("Flashlight It Seems Like It Needs Batteries", "FlashLight", 1, false);
         //Used to see more items
         Item batteries = new Item("Old Batteries Seems To Have Some Power Left", "Batteries", 1, false);
         //Used to power the flashlight

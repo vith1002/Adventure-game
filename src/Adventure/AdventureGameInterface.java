@@ -29,7 +29,7 @@ public class AdventureGameInterface {
             if(player.searchItemFromInventory("Map") != null){
                 mapAquired = true;
             }
-            if(player.searchItemFromInventory("flash light") != null
+            if(player.searchItemFromInventory("flashlight") != null
                     && player.searchItemFromInventory("batteries") != null){
 
                 flashLightOn = true;

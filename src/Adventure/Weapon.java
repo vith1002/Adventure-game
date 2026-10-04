@@ -1,6 +1,6 @@
 package Adventure;
 
-public class Weapon extends Item{
+public abstract class Weapon extends Item{
 
     private int damage;
 
@@ -8,4 +8,17 @@ public class Weapon extends Item{
         super(longName, shortName, weight, requiresLight);
         this.damage = damage;
     }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public abstract boolean canUse();
+
+    public abstract void use();
+
+    public abstract String getAttackVerb();
+
+    public abstract String getUsesLeftText();
+
 }

@@ -8,12 +8,14 @@ public class Player {
     private ArrayList<Item> inventory;
     private int maxWeight = 20;
     private int healthPoints = 100;
+    private Weapon equipped;
 
     public Player(Room currentRoom) {
         this.currentRoom = currentRoom;
         this.inventory = new ArrayList<>();
         this.maxWeight = maxWeight;
         this.healthPoints = healthPoints;
+        this.equipped = equipped;
     }
 
     public Room getCurrentRoom() {
@@ -43,7 +45,7 @@ public class Player {
         if(healthPoints > 99){
             System.out.print(" -> You are in perfect health");
         }else if(healthPoints >= 50 && 100 > healthPoints){
-            System.out.print(" -> you are in good health, but avoid figthing right now");
+            System.out.print(" -> you are in good health, but avoid fighting right now");
         }else if(healthPoints < 50 && healthPoints > 24){
             System.out.print(" -> You are wounded - find something healthy to eat");
         }else if(healthPoints < 25 && healthPoints > 0){
@@ -150,6 +152,11 @@ public class Player {
 
         for (int i = 0; i < inventory.size(); i++) {
             if(itemHave.equalsIgnoreCase(inventory.get(i).getShortName())){
+
+                if(inventory.get(i) instanceof Weapon && inventory.get(i) == getEquipped()){
+                    setEquipped(null);
+                }
+
                 currentRoom.getItems().add(inventory.get(i));
                 Item item = inventory.get(i);
                 inventory.remove(i);
@@ -160,11 +167,63 @@ public class Player {
     }
 
     public void printInventory(){
+
         if(inventory.size() > 0){
             for (Item item : inventory){
                 System.out.println(item.getShortName());
+
             }
         }
+        if(equipped != null){
+            System.out.println("Equipped Weapon: " + getEquipped().getShortName());
+        }
+    }
+
+
+    //Weaponm system
+
+    public Weapon equip(String shortName){
+
+        Item checkItemWeapon = searchItemFromInventory(shortName);
+
+        if(checkItemWeapon == null){
+            return null;
+        }
+
+        if(checkItemWeapon instanceof Weapon){
+            Weapon weapon = (Weapon) checkItemWeapon;
+
+            setEquipped(weapon);
+
+            return weapon;
+        }
+
+        return null;
+    }
+
+    public Weapon getEquipped(){
+        return equipped;
+    }
+
+    public void setEquipped(Weapon equipped){
+        this.equipped = equipped;
+    }
+
+    public void attack() {
+
+        if (equipped == null) {
+            System.out.println("You dont have a weapon equipped");
+            return;
+        }
+
+        if (!equipped.canUse()) {
+            System.out.println("No ammunition left");
+            return;
+        }
+
+        equipped.use();
+
+        // ramte noget med equipped.getDamage()
     }
 
     //Headline : Move System
