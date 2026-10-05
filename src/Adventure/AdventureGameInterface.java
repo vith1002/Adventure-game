@@ -17,6 +17,7 @@ public class AdventureGameInterface {
         System.out.println("'quit' to exit the game!\n");
 
         while (true) {
+
             if(player.getCurrentRoom().getName().equals("Exit")
                     && player.searchItemFromInventory("Haunted Idol") != null){
 
@@ -122,6 +123,8 @@ public class AdventureGameInterface {
                 System.out.println();
                 System.out.println("menu");
                 System.out.println("=============================================");
+                System.out.println("Equip Weapon");
+                System.out.println("Attack");
                 System.out.println("Look For Items");
                 System.out.println();
                 System.out.println("View Inventory");
@@ -203,6 +206,47 @@ public class AdventureGameInterface {
                             case EATEN:
                                 System.out.println("You eat the " + eatOutcome.getItemName());
                                 player.printHealthPoints();
+                                break;
+                        }
+                        break;
+                    case "equip weapon", "equip":
+
+                        System.out.println("What weapon would you like to equip?");
+                        player.printInventory();
+                        command = scanner.nextLine();
+
+                        Weapon weapon = player.equip(command.toLowerCase());
+
+                        if(weapon == null){
+                            System.out.println("You cannot equip that.");
+                        }else{
+                            System.out.println(
+                                    "You have equipped " + weapon.getShortName()
+                            );
+                        }
+
+                        break;
+                    case "attack":
+
+                        AttackResult result = player.attack();
+
+                        switch(result){
+
+                            case NO_WEAPON:
+                                System.out.println("You have no weapon equipped.");
+                                break;
+
+                            case NO_AMMO:
+                                System.out.println("Your weapon is out of ammunition.");
+                                break;
+
+                            case ATTACK_SUCCES:
+                                System.out.println(
+                                        "You " + player.getEquipped().getAttackVerb() + " the "
+                                                + player.getEquipped().getShortName()
+                                                + " at the empty air. "
+                                                + player.getEquipped().getUsesLeftText()
+                                );
                                 break;
                         }
                         break;

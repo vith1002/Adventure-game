@@ -209,20 +209,24 @@ public class Player {
         this.equipped = equipped;
     }
 
-    public int attack() {
+    public AttackResult attack() {
 
         if (equipped == null) {
-            return 0;
+            return AttackResult.NO_WEAPON;
         }
 
         if (!equipped.canUse()) {
-            return 0;
+            return AttackResult.NO_AMMO;
         }
 
         equipped.use();
-        return equipped.getDamage();
-
+        return AttackResult.ATTACK_SUCCES;
     }
+
+
+    //if(!(item instanceof Food)){
+//        return new EatOutcome(EatResult.NOT_FOOD,item.getLongName(),0);
+  //  }
 
     //Headline : Move System
 
@@ -259,35 +263,49 @@ public class Player {
         boolean isRoomLocked = false;
         Room nextRoom = null;
 
-        if(currentRoom.isLocked()){
-            isRoomLocked = true;
-            return isRoomLocked;
-        }
 
         switch (direction.toLowerCase()) {
 
             case "go north", "north", "n":
                 nextRoom = currentRoom.getNorth();
-                break;
+
+                if(nextRoom == null || nextRoom.isLocked()){
+                    return false;
+                }
+
+                currentRoom = nextRoom;
+                return true;
 
             case "go south", "south", "s":
                 nextRoom = currentRoom.getSouth();
-                break;
+
+                if(nextRoom == null || nextRoom.isLocked()){
+                    return false;
+                }
+
+                currentRoom = nextRoom;
+                return true;
 
             case "go east", "east", "e":
                 nextRoom = currentRoom.getEast();
-                break;
+
+                if(nextRoom == null || nextRoom.isLocked()){
+                    return false;
+                }
+
+                currentRoom = nextRoom;
+                return true;
 
             case "go west", "west", "w":
                 nextRoom = currentRoom.getWest();
-                break;
-        }
 
-        if (nextRoom != null) {
-            currentRoom = nextRoom;
-            return true;
-        }
+                if(nextRoom == null || nextRoom.isLocked()){
+                    return false;
+                }
 
+                currentRoom = nextRoom;
+                return true;
+        }
         return false;
     }
 }
