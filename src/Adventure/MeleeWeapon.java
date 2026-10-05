@@ -12,6 +12,7 @@ public class MeleeWeapon extends Weapon{
 
     @Override
     public void use(){
+        getAttackVerb();
     }
 
     @Override

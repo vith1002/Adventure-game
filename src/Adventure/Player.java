@@ -209,21 +209,19 @@ public class Player {
         this.equipped = equipped;
     }
 
-    public void attack() {
+    public int attack() {
 
         if (equipped == null) {
-            System.out.println("You dont have a weapon equipped");
-            return;
+            return 0;
         }
 
         if (!equipped.canUse()) {
-            System.out.println("No ammunition left");
-            return;
+            return 0;
         }
 
         equipped.use();
+        return equipped.getDamage();
 
-        // ramte noget med equipped.getDamage()
     }
 
     //Headline : Move System
