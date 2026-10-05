@@ -243,8 +243,7 @@ public class AdventureGameInterface {
                             case ATTACK_SUCCES:
                                 System.out.println(
                                         "You " + player.getEquipped().getAttackVerb() + " the "
-                                                + player.getEquipped().getShortName()
-                                                + " at the empty air. "
+                                                + player.getEquipped().getShortName() + " at the empty air. "
                                                 + player.getEquipped().getUsesLeftText()
                                 );
                                 break;
