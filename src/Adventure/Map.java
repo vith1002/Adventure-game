@@ -11,11 +11,11 @@ public class Map {
         //quest items
         Item rusticKey = new Item("Old Rustic Key Seems Important","Rustic Key", 1, false);
         //Used to open the Basement
-        Item silverKey = new Item("Silver Key Seems Important", "Silver Key", 1, false);
+        Item silverKey = new Item("Silver Key Seems Important", "Silver Key", 1, true);
         //Used to open the Study
-        Item goldenKey = new Item("Shiny Golden Key Seems Important", "Golden Key", 1, false);
+        Item goldenKey = new Item("Shiny Golden Key Seems Important", "Golden Key", 1, true);
         //Used to open the Secret Attic
-        Item cryptoKey = new Item("Dark Auro Embessels The Objekt Looking Like A Key", "Crypto Key", 1, false);
+        Item cryptoKey = new Item("Dark Auro Embessels The Objekt Looking Like A Key", "Crypto Key", 1, true);
         //Used to open End Area
         Item theHauntedIdol = new Item("Mystrious Force That Feels Overwhelming", "Haunted Idol", 20, false);
         //Win Condition
@@ -23,10 +23,13 @@ public class Map {
         //Used to see more items
         Item batteries = new Item("Old Batteries Seems To Have Some Power Left", "Batteries", 1, false);
         //Used to power the flashlight
-        Item backPack = new Item("Old BackPack Might Be Of Use", "BackPack", -20, false);
+        Item backPack = new Item("Old BackPack Might Be Of Use", "BackPack", -20, true);
         //Lets The User Have More Inventory Space
         Item map = new Item("Old Map Seems To Be Of The House", "Map", 1, false);
         //Lets The Player See Every Room
+        Item revolver = new RangedWeapon("Old Revolver from the 70's", "Revolver", 2, false, 30, 4);
+        //Revovler weaponn
+        Item silverKnuckles = new MeleeWeapon("Silver Brass knuckles", "Knuckles", 1, false, 15);
 
 
         //Food Items
@@ -81,6 +84,8 @@ public class Map {
         ItemsRoom5.add(map);
         ItemsRoom5.add(newspaper);
         ItemsRoom2.add(rusticKey);
+        ItemsRoom5.add(revolver);
+        ItemsRoom5.add(silverKnuckles);
 
         ArrayList<Item> ItemsRoom6 = new ArrayList<>();
         ItemsRoom6.add(flashLight);
