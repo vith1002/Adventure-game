@@ -128,24 +128,18 @@ public class Map {
 
         ArrayList<Item> ItemsRoom16 = new ArrayList<>();
 
-        Room room1 = new Room("Gate", "Den rustne port til godset.", ItemsRoom1, false);
-        Room room2 = new Room("Porch", "En gammel træveranda.", ItemsRoom2, true);
-        Room room3 = new Room("Entrance", "Indgangen til det hjemsøgte hus.", ItemsRoom3, false);
-        Room room4 = new Room("Main Hall", "Den store centrale hal.", ItemsRoom4, false);
-        Room room5 = new Room("Library", "Et støvet bibliotek.", ItemsRoom5, false);
-        Room room6 = new Room("Study", "Et gammelt arbejdsværelse.", ItemsRoom6, false);
-        Room room7 = new Room("Bedroom", "Et forladt soveværelse.", ItemsRoom7, false);
-        Room room8 = new Room("Ballroom", "En mørk balsal.", ItemsRoom8, false);
-        Room room9 = new Room("Dining Room", "En stor spisestue.", ItemsRoom9, false);
+        ArrayList<Enemy> enemiesRoom1 = new ArrayList<>();
 
-        Room room10 = new Room("Kitchen", "Et gammelt køkken.", ItemsRoom10, false);
-        Room room11 = new Room("Basement", "En fugtig kælder.", ItemsRoom11, true);
-        Room room12 = new Room("Boiler Room", "Kedlerne brummer svagt.", ItemsRoom12, false);
-        Room room13 = new Room("Attic", "Et mørkt loft.", ItemsRoom13, true);
-        Room room14 = new Room("Storage Loft", "Fyldt med gamle kasser.", ItemsRoom14, true);
-        Room room15 = new Room("Secret Attic", "Et skjult loftsrum.", ItemsRoom15, true);
 
-        Room room16 = new Room("Exit","The gate stands open. Freedom lies beyond.", ItemsRoom16,true);
+
+        Room room10 = new Room("Kitchen", "Et gammelt køkken.", ItemsRoom10, false, null);
+        Room room11 = new Room("Basement", "En fugtig kælder.", ItemsRoom11, true, null);
+        Room room12 = new Room("Boiler Room", "Kedlerne brummer svagt.", ItemsRoom12, false, null);
+        Room room13 = new Room("Attic", "Et mørkt loft.", ItemsRoom13, true, null);
+        Room room14 = new Room("Storage Loft", "Fyldt med gamle kasser.", ItemsRoom14, true, null);
+        Room room15 = new Room("Secret Attic", "Et skjult loftsrum.", ItemsRoom15, true,null);
+
+        Room room16 = new Room("Exit","The gate stands open. Freedom lies beyond.", ItemsRoom16,true,null);
 
 
         // Gate <-> Porch
