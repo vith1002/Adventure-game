@@ -1,5 +1,6 @@
 package Adventure;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AdventureGameInterface {
@@ -17,6 +18,24 @@ public class AdventureGameInterface {
         System.out.println("'quit' to exit the game!\n");
 
         while (true) {
+
+            if(player.getCurrentRoom().getEnemies() != null){
+
+                while(true){
+
+                    ArrayList<Enemy> enemy = player.getCurrentRoom().getEnemies();
+
+                    if(player.attack() == AttackResult.ATTACK_SUCCES){
+                        int damage = player.getEquipped().getDamage();
+                        for (int i = 0; i < enemy.size(); i++) {
+                            enemy.get(i).hit(damage);
+                        }
+                    }
+                }
+
+
+
+            }
 
             if(player.getCurrentRoom().getName().equals("Exit")
                     && player.searchItemFromInventory("Haunted Idol") != null){
@@ -284,11 +303,6 @@ public class AdventureGameInterface {
                 }
             }
         }
-
-
-
-
-
         scanner.close();
     }
 }

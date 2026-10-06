@@ -135,7 +135,6 @@ public class Player {
     }
 
 
-    //Overflødig?
     public Item searchItemFromInventory(String shortName){
         String itemHave = shortName;
         for (int i = 0; i < inventory.size(); i++) {
@@ -180,7 +179,7 @@ public class Player {
     }
 
 
-    //Weaponm system
+    //Weapon system
 
     public Weapon equip(String shortName){
 
@@ -223,14 +222,15 @@ public class Player {
         return AttackResult.ATTACK_SUCCES;
     }
 
+    public boolean hit(int damage){
+        setHealthPoints(healthPoints - damage);
 
-    //if(!(item instanceof Food)){
-//        return new EatOutcome(EatResult.NOT_FOOD,item.getLongName(),0);
-  //  }
-
-    //Headline : Move System
-
-    //Prints the rooms around the player
+        if(healthPoints <= 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public void canMove(){
 
@@ -258,7 +258,6 @@ public class Player {
         }
     }
 
-    //Tjek igennem ift true og false returns
     public boolean move(String direction) {
         boolean isRoomLocked = false;
         Room nextRoom = null;

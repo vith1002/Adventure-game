@@ -27,8 +27,8 @@ public class Map {
         //Lets The User Have More Inventory Space
         Item map = new Item("Old Map Seems To Be Of The House", "Map", 1, false);
         //Lets The Player See Every Room
-        Item revolver = new RangedWeapon("Old Revolver from the 70's", "Revolver", 2, false, 30, 4);
-        //Revovler weaponn
+        Weapon revolver = new RangedWeapon("Old Revolver from the 70's", "Revolver", 2, false, 30, 4);
+        //Revolver weapon
         Item silverKnuckles = new MeleeWeapon("Silver Brass knuckles", "Knuckles", 1, false, 15);
 
 
@@ -65,6 +65,12 @@ public class Map {
 
         Item fuse = new Item("An Old Electrical Fuse Covered In Rust", "Fuse", 1, true);
         Item painting = new Item("A Large Portrait Of The Mansion Founder Watching Your Every Move", "Painting", 5, true);
+
+        Enemy skeleton = new Enemy("Skeleton","An evil skeleton has appeared and is coming at you!!","something", 100, revolver);
+        Enemy owner = new Enemy("Owner","The mansion owner have spotted you!!","Angry",100, revolver);
+        Enemy ghost = new Enemy("Ghost","An angry ghost is hunting you!!","Floating ghost", 50, revolver);
+
+
 
         ArrayList<Item> ItemsRoom1 = new ArrayList<>();
         ItemsRoom1.add(silverKey);

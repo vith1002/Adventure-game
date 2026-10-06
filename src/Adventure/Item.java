@@ -45,7 +45,4 @@ public class Item {
         this.shortName = shortName;
     }
 
-    public int getChangeHealth(){
-        return 0;
-    }
 }
