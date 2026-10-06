@@ -7,17 +7,27 @@ public class Room {
     private String description;
     private ArrayList<Item> items;
     private boolean locked;
+    private ArrayList<Enemy> enemies;
 
     private Room north;
     private Room east;
     private Room south;
     private Room west;
 
-    public Room(String name, String description, ArrayList<Item> items, Boolean locked){
+    public Room(String name, String description, ArrayList<Item> items, Boolean locked, ArrayList<Enemy> enemies){
         this.name = name;
         this.description = description;
         this.items = items;
         this.locked = locked;
+        this.enemies = enemies;
+    }
+
+    public void addEnemy(Enemy enemy){
+         enemies.add(enemy);
+    }
+
+    public void remove(Enemy enemy){
+        enemies.remove(enemy);
     }
 
     public Item findItem(String shortName){
