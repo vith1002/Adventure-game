@@ -136,7 +136,15 @@ public class Map {
         ArrayList<Enemy> enemiesRoom1 = new ArrayList<>();
 
 
-
+        Room room1 = new Room("Gate", "Den rustne port til godset.", ItemsRoom1, false,null);
+        Room room2 = new Room("Porch", "En gammel træveranda.", ItemsRoom2, true,null);
+        Room room3 = new Room("Entrance", "Indgangen til det hjemsøgte hus.", ItemsRoom3, false,null);
+        Room room4 = new Room("Main Hall", "Den store centrale hal.", ItemsRoom4, false,null);
+        Room room5 = new Room("Library", "Et støvet bibliotek.", ItemsRoom5, false,null);
+        Room room6 = new Room("Study", "Et gammelt arbejdsværelse.", ItemsRoom6, false, null);
+        Room room7 = new Room("Bedroom", "Et forladt soveværelse.", ItemsRoom7, false, null);
+        Room room8 = new Room("Ballroom", "En mørk balsal.", ItemsRoom8, false, null);
+        Room room9 = new Room("Dining Room", "En stor spisestue.", ItemsRoom9, false, null);
         Room room10 = new Room("Kitchen", "Et gammelt køkken.", ItemsRoom10, false, null);
         Room room11 = new Room("Basement", "En fugtig kælder.", ItemsRoom11, true, null);
         Room room12 = new Room("Boiler Room", "Kedlerne brummer svagt.", ItemsRoom12, false, null);
