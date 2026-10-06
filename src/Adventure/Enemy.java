@@ -20,18 +20,25 @@ public class Enemy {
     public void Attack(Player player){
         int damage = weapon.getDamage();
 
-        player.getEquipped().getDamage();
+        if(player.getHealthPoints() > 0){
+            player.setHealthPoints(player.getHealthPoints() - damage);
+        }
     }
 
     public int hit(int damage){
         int healthLeft = health - damage;
 
-        if(healthLeft > 0){
-            room.remove();
+        if(healthLeft <= 0){
+            room.getItems().add(weapon);
+            room.remove(this);
+            return healthLeft;
         }else{
-            System.out.println("Enemy have " + healthLeft + " HitPoints left");
+            return healthLeft;
         }
-        return healthLeft;
+    }
+
+    public String getShortName(){
+        this.shortName = shortName;
     }
 
 }

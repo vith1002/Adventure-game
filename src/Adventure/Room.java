@@ -30,6 +30,20 @@ public class Room {
         enemies.remove(enemy);
     }
 
+    public Enemy findEnemies(String shortName){
+
+        for (int i = 0; i < enemies.size(); i++) {
+            if(enemies.get(i).getShortName().equalsIgnoreCase(shortName)){
+                return enemies.get(i);
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Enemy> getEnemies(){
+        return enemies;
+    }
+
     public Item findItem(String shortName){
         for (Item item : items){
             if(shortName.equalsIgnoreCase(item.getShortName())){
