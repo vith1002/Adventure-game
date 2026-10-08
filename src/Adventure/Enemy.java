@@ -48,4 +48,7 @@ public class Enemy {
         return room;
     }
 
+    public String getDescription(){
+        return description;
+    }
 }

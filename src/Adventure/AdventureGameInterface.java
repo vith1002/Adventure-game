@@ -1,5 +1,6 @@
 package Adventure;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,19 +22,113 @@ public class AdventureGameInterface {
 
             if(player.getCurrentRoom().getEnemies() != null){
 
-                while(true){
+                while(!player.getCurrentRoom().getEnemies().isEmpty()){
 
-                    ArrayList<Enemy> enemy = player.getCurrentRoom().getEnemies();
+                    ArrayList<Enemy> enemies = player.getCurrentRoom().getEnemies();
 
-                    if(player.attack() == AttackResult.ATTACK_SUCCES){
-                        int damage = player.getEquipped().getDamage();
-                        for (int i = 0; i < enemy.size(); i++) {
-                            enemy.get(i).hit(damage);
+                    Room thisRoom = player.getCurrentRoom();
+
+                    for (int i = 0; i < enemies.size(); i++) {
+                        if(player.attack() == AttackResult.ATTACK_SUCCES){
+                            int damage = player.getEquipped().getDamage();
+
+                            enemies.get(i).hit(damage);
+
+                            enemies.get(i).getDescription();
+                            enemies.get(i).Attack(player);
+
+
+                        }else if(player.attack() == AttackResult.NO_AMMO){
+                            System.out.println("You Are Out Of Ammo!");
+
+                            enemies.get(i).getDescription();
+                            enemies.get(i).Attack(player);
+
+                        }else if(player.attack() == AttackResult.NO_WEAPON){
+                            System.out.println("You dont have a weapon equipped");
+
+                            enemies.get(i).getDescription();
+                            enemies.get(i).Attack(player);
                         }
                     }
+
+                    System.out.println("Do you want to run?");
+
+                    String command = scanner.nextLine();
+
+                    if(command.toLowerCase().equals("run")){
+
+                        System.out.println("You run!");
+
+                        player.canMove();
+
+                        System.out.println();
+
+                        System.out.println("n/s/e/w or menu");
+                        System.out.println("=============================================");
+                        System.out.print("> ");
+
+                        command = scanner.nextLine().toLowerCase();
+
+                        if (!player.move(command) && !command.equalsIgnoreCase("menu")) {
+                            if(player.getCurrentRoom().isLocked()){
+                                System.out.println("The Door Is Locked!");
+                                System.out.println("Do You Have The Key?");
+                                command = scanner.nextLine().toLowerCase();
+
+                                if(command.equals("yes")){
+                                    switch (player.getCurrentRoom().getName().toLowerCase()){
+
+                                        case "basement":
+                                            if (player.searchItemFromInventory("rustic key") != null){
+                                                player.takeItemFromInventory("Rustic Key");
+                                                player.getCurrentRoom().setLocked(false);
+                                                break;
+                                            }else{
+                                                System.out.println("You Need The Rustic Key To Enter The Basement!");
+                                                break;
+                                            }
+                                        case "storage loft":
+                                            if(player.searchItemFromInventory("silver key") != null){
+                                                player.takeItemFromInventory("Silver Key");
+                                                player.getCurrentRoom().setLocked(false);
+                                                break;
+                                            }else{
+                                                System.out.println("You Need The Silver Key!");
+                                                break;
+                                            }
+                                        case "porch":
+                                            if(player.searchItemFromInventory("golden key") != null) {
+                                                player.takeItemFromInventory("Golden Key");
+                                                player.getCurrentRoom().setLocked(false);
+                                                break;
+                                            }else{
+                                                System.out.println("You Need The Golden Key To Enter The Secret Attic");
+                                                break;
+                                            }
+                                        case "secret attic":
+                                            if(player.searchItemFromInventory("gate key") != null) {
+                                                player.takeItemFromInventory("gate Key");
+                                                player.getCurrentRoom().setLocked(false);
+                                                break;
+                                            }else{
+                                                System.out.println("You Need A Gate Key To Exit!");
+                                                break;
+                                            }
+                                    }
+                                }
+                            }else{
+                                System.out.println("You Cant Enter Here!");
+                            }
+                        }
+
+                        if(thisRoom != player.getCurrentRoom()){
+                            break;
+                        }
+
+                    }
+
                 }
-
-
 
             }
 
@@ -135,8 +230,6 @@ public class AdventureGameInterface {
                     System.out.println("You Cant Enter Here!");
                 }
             }
-
-
 
             if(command.equalsIgnoreCase("menu")){
                 System.out.println();
