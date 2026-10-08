@@ -15,11 +15,17 @@ public class Room {
     private Room west;
 
     public Room(String name, String description, ArrayList<Item> items, Boolean locked, ArrayList<Enemy> enemies){
+
         this.name = name;
         this.description = description;
         this.items = items;
         this.locked = locked;
-        this.enemies = enemies;
+
+        if(enemies != null) {
+            this.enemies = enemies;
+        } else {
+            this.enemies = new ArrayList<>();
+        }
     }
 
     public void addEnemy(Enemy enemy){

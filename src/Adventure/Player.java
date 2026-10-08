@@ -258,53 +258,62 @@ public class Player {
         }
     }
 
+
     public boolean move(String direction) {
-        boolean isRoomLocked = false;
+
         Room nextRoom = null;
 
-
         switch (direction.toLowerCase()) {
-
             case "go north", "north", "n":
                 nextRoom = currentRoom.getNorth();
-
-                if(nextRoom == null || nextRoom.isLocked()){
-                    return false;
-                }
-
-                currentRoom = nextRoom;
-                return true;
+                break;
 
             case "go south", "south", "s":
                 nextRoom = currentRoom.getSouth();
-
-                if(nextRoom == null || nextRoom.isLocked()){
-                    return false;
-                }
-
-                currentRoom = nextRoom;
-                return true;
+                break;
 
             case "go east", "east", "e":
                 nextRoom = currentRoom.getEast();
-
-                if(nextRoom == null || nextRoom.isLocked()){
-                    return false;
-                }
-
-                currentRoom = nextRoom;
-                return true;
+                break;
 
             case "go west", "west", "w":
                 nextRoom = currentRoom.getWest();
-
-                if(nextRoom == null || nextRoom.isLocked()){
-                    return false;
-                }
-
-                currentRoom = nextRoom;
-                return true;
+                break;
         }
-        return false;
+
+        if (nextRoom == null) {
+            return false;
+        }
+
+        if (nextRoom.isLocked()) {
+
+            String key = "";
+
+            switch (nextRoom.getName().toLowerCase()) {
+                case "basement":
+                    key = "Rustic Key";
+                    break;
+                case "storage loft":
+                    key = "Silver Key";
+                    break;
+                case "secret attic":
+                    key = "Golden Key";
+                    break;
+                case "exit":
+                    key = "Crypto Key";
+                    break;
+            }
+
+            if (searchItemFromInventory(key) == null) {
+                return false;
+            }
+
+            takeItemFromInventory(key);
+            nextRoom.setLocked(false);
+        }
+
+        currentRoom = nextRoom;
+        return true;
     }
+
 }

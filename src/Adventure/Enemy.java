@@ -8,20 +8,23 @@ public class Enemy {
     private Weapon weapon;
     private Room room;
 
-    public Enemy(String shortName, String longName, String description, int health, Weapon weapon) {
+    public Enemy(String shortName, String longName, String description, int health, Weapon weapon, Room room) {
         this.shortName = shortName;
         this.longName = longName;
         this.description = description;
         this.health = health;
         this.weapon = weapon;
+        this.room = room;
     }
 
-    public void Attack(Player player){
-        int damage = weapon.getDamage();
+    public boolean Attack(Player player) {
 
-        if(player.getHealthPoints() > 0){
-            player.setHealthPoints(player.getHealthPoints() - damage);
+        if (!weapon.canUse()) {
+            return false;
         }
+        weapon.use();
+        player.hit(weapon.getDamage());
+        return true;
     }
 
     public int hit(int damage){
@@ -38,6 +41,10 @@ public class Enemy {
 
     public void setHealth(int health){
         this.health = health;
+    }
+
+    public int getHealth(){
+        return health;
     }
 
     public String getShortName(){

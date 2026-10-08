@@ -30,6 +30,9 @@ public class Map {
         Weapon revolver = new RangedWeapon("Old Revolver from the 70's", "Revolver", 2, false, 30, 4);
         //Revolver weapon
         Item silverKnuckles = new MeleeWeapon("Silver Brass knuckles", "Knuckles", 1, false, 15);
+        Weapon scythe = new MeleeWeapon("A Dark Sytche", "Scythe", 5, false, 20);
+        Weapon Cane = new MeleeWeapon("Cane with a skull", "Cane", 5, false, 10);
+        Item Pistol = new RangedWeapon("A modern pistol", "Pistol", 5, false, 20, 10);
 
 
         //Food Items
@@ -66,12 +69,6 @@ public class Map {
         Item fuse = new Item("An Old Electrical Fuse Covered In Rust", "Fuse", 1, true);
         Item painting = new Item("A Large Portrait Of The Mansion Founder Watching Your Every Move", "Painting", 5, true);
 
-        Enemy skeleton = new Enemy("Skeleton","An evil skeleton has appeared and is coming at you!!","something", 100, revolver);
-        Enemy owner = new Enemy("Owner","The mansion owner have spotted you!!","Angry",100, revolver);
-        Enemy ghost = new Enemy("Ghost","An angry ghost is hunting you!!","Floating ghost", 50, revolver);
-
-
-
         ArrayList<Item> ItemsRoom1 = new ArrayList<>();
         ItemsRoom1.add(silverKey);
         ItemsRoom1.add(apple);
@@ -90,8 +87,8 @@ public class Map {
         ItemsRoom5.add(map);
         ItemsRoom5.add(newspaper);
         ItemsRoom2.add(rusticKey);
-        ItemsRoom5.add(revolver);
         ItemsRoom5.add(silverKnuckles);
+        ItemsRoom5.add(Pistol);
 
         ArrayList<Item> ItemsRoom6 = new ArrayList<>();
         ItemsRoom6.add(flashLight);
@@ -143,7 +140,7 @@ public class Map {
 
 
         Room room1 = new Room("Gate", "Den rustne port til godset.", ItemsRoom1, false,null);
-        Room room2 = new Room("Porch", "En gammel træveranda.", ItemsRoom2, true,null);
+        Room room2 = new Room("Porch", "En gammel træveranda.", ItemsRoom2, false,null);
         Room room3 = new Room("Entrance", "Indgangen til det hjemsøgte hus.", ItemsRoom3, false,null);
         Room room4 = new Room("Main Hall", "Den store centrale hal.", ItemsRoom4, false,null);
         Room room5 = new Room("Library", "Et støvet bibliotek.", ItemsRoom5, false,null);
@@ -154,18 +151,21 @@ public class Map {
         Room room10 = new Room("Kitchen", "Et gammelt køkken.", ItemsRoom10, false, null);
         Room room11 = new Room("Basement", "En fugtig kælder.", ItemsRoom11, true, null);
         Room room12 = new Room("Boiler Room", "Kedlerne brummer svagt.", ItemsRoom12, false, null);
-        Room room13 = new Room("Attic", "Et mørkt loft.", ItemsRoom13, true, null);
+        Room room13 = new Room("Attic", "Et mørkt loft.", ItemsRoom13, false, null);
         Room room14 = new Room("Storage Loft", "Fyldt med gamle kasser.", ItemsRoom14, true, null);
         Room room15 = new Room("Secret Attic", "Et skjult loftsrum.", ItemsRoom15, true,null);
-
         Room room16 = new Room("Exit","The gate stands open. Freedom lies beyond.", ItemsRoom16,true,null);
 
+        Enemy skeleton = new Enemy("Skeleton","Skeleton with a pumpkin head grinning","The skeleton laughs while shooting at you!", 50, revolver, room1);
+        Enemy owner = new Enemy("Owner","The mansion owner have spotted you!!","The owner takes the cane and swings it at you!",100, Cane, room15);
+        Enemy ghost = new Enemy("Ghost","An grim looking ghost floats in front of you","It swings it scythe at you!", 50, scythe, room12);
 
         // Gate <-> Porch
         room1.setNorth(room2);
         room2.setSouth(room1);
         room1.setSouth(room16);
         room16.setNorth(room1);
+        room1.addEnemy(skeleton);
 
         // Porch <-> Entrance
         room2.setNorth(room3);
@@ -210,6 +210,7 @@ public class Map {
         // Basement <-> Boiler Room
         room11.setWest(room12);
         room12.setEast(room11);
+        room12.addEnemy(ghost);
 
         // Library <-> Attic
         room5.setNorth(room13);
@@ -222,6 +223,7 @@ public class Map {
         // Storage Loft <-> Secret Attic
         room14.setNorth(room15);
         room15.setSouth(room14);
+        room15.addEnemy(owner);
 
         startRoom = room5;
     }
